@@ -1,22 +1,30 @@
 {
-  "name": "v-video",
-  "version": "1.0.0",
+  "name": "@thiago.dlm/vue-video",
+  "version": "1.0.7",
   "description": "A video player wrapped as a Vue.js component",
   "author": "Thiago Della Libera Moreira",
-  "private": true,
+  "private": false,
+  "main": "dist/v-video.umd.js",
+  "module": "dist/v-video.esm.js",
+  "unpkg": "dist/v-video.min.js",
+  "browser": {
+    "./sfc": "src/components/v-video.vue"
+  },
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-video.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-video.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-video.min.js --extend"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.1",
     "@fortawesome/free-solid-svg-icons": "^5.1.1",
     "@fortawesome/vue-fontawesome": "^0.1.1",
-    "material-design-icons": "^3.0.1",
     "vue": "^2.5.2"
   },
   "devDependencies": {
@@ -67,6 +75,8 @@
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-vue": "^4.3.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "sinon": "^4.0.0",

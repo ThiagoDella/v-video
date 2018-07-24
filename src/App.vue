@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <v_video src="VIDEO_URL"/>
+    <v_video src="https://thiagodella.github.io/static/media/lunar_module.57ff26e.mp4"/>
   </div>
 </template>
 
-<script>
+<script>/* eslint-disable camelcase */
 import v_video from './components/v-video';
 
 export default {
